@@ -20,6 +20,9 @@ class User {
   @Column()
   password: string
 
+  @Column()
+  avatar: string | null
+
   @CreateDateColumn()
   created_at: Date
 
