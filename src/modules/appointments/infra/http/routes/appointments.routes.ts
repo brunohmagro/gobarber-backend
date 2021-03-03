@@ -1,10 +1,10 @@
 import { Router } from 'express'
 import { parseISO } from 'date-fns'
 import { getCustomRepository } from 'typeorm'
-import AppointmentsRepository from '../../../../modules/appointments/repositories/AppointmentsRepository'
-import CreateAppointmentService from '../../../../modules/appointments/services/CreateAppointmentService'
+import AppointmentsRepository from '@mobules/appointments/repositories/AppointmentsRepository'
+import CreateAppointmentService from '@mobules/appointments/services/CreateAppointmentService'
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated'
+import ensureAuthenticated from '@mobules/users/infra/http/middlewares/ensureAuthenticated'
 
 const appointmentsRouter = Router()
 appointmentsRouter.use(ensureAuthenticated)
