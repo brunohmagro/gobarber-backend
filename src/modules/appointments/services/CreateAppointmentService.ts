@@ -1,18 +1,22 @@
 import { startOfHour } from 'date-fns'
+import { injectable, inject } from 'tsyringe'
 
 import Appointment from '@mobules/appointments/infra/typeorm/entities/Appointment'
 import IAppointmentsRepository from '@mobules/appointments/repositories/IAppointmentsRepository'
+import ICreateAppintmentDTO from '@mobules/appointments/dtos/ICreateAppintmentDTO'
 import AppError from '@shared/errors/AppError'
 
-interface IRequest {
-  date: Date
-  provider_id: string
-}
-
+@injectable()
 class CreateAppointmentService {
-  constructor(private appointmentRepository: IAppointmentsRepository) {}
+  constructor(
+    @inject('AppointmentsRepository')
+    private appointmentRepository: IAppointmentsRepository
+  ) {}
 
-  public async execute({ date, provider_id }: IRequest): Promise<Appointment> {
+  public async execute({
+    date,
+    provider_id,
+  }: ICreateAppintmentDTO): Promise<Appointment> {
     const appointmentDate = startOfHour(date)
 
     const findAppointmentInSameDate = await this.appointmentRepository.findByDate(
