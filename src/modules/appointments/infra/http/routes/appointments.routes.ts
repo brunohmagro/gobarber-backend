@@ -1,13 +1,12 @@
 import { Router } from 'express'
-import { parseISO } from 'date-fns'
-import { container } from 'tsyringe'
 
-import CreateAppointmentService from '@mobules/appointments/services/CreateAppointmentService'
-
+import AppointmentsController from '@mobules/appointments/infra/http/controllers/AppointmentsController'
 import ensureAuthenticated from '@mobules/users/infra/http/middlewares/ensureAuthenticated'
 
 const appointmentsRouter = Router()
 appointmentsRouter.use(ensureAuthenticated)
+
+const appointmentsController = new AppointmentsController()
 
 // appointmentsRouter.get('/', async (request, response) => {
 //   const appointments = await appointmentRepository.find()
@@ -15,19 +14,6 @@ appointmentsRouter.use(ensureAuthenticated)
 //   return response.json(appointments)
 // })
 
-appointmentsRouter.post('/', async (request, response) => {
-  const { provider_id, date } = request.body
-
-  const parsedDate = parseISO(date)
-
-  const createAppointment = container.resolve(CreateAppointmentService)
-
-  const appointment = await createAppointment.execute({
-    provider_id,
-    date: parsedDate,
-  })
-
-  return response.json(appointment)
-})
+appointmentsRouter.post('/', appointmentsController.create)
 
 export default appointmentsRouter
