@@ -1,16 +1,18 @@
-import { hash } from 'bcryptjs'
 import { injectable, inject } from 'tsyringe'
 
 import User from '@mobules/users/infra/typeorm/entities/User'
 import AppError from '@shared/errors/AppError'
 import IUsersRepository from '@mobules/users/repositories/IUsersRepository'
 import ICreateUserDTO from '@mobules/users/dtos/ICreateUserDTO'
+import IHashProvioder from '@mobules/users/providers/HashProvider/models/IHashProvioder'
 
 @injectable()
 class CreateUserServive {
   constructor(
     @inject('UsersRepository')
     private userRepository: IUsersRepository,
+    @inject('BCryptProvider')
+    private hashProvider: IHashProvioder,
   ) {}
 
   public async execute({ name, email, password }: ICreateUserDTO): Promise<User> {
@@ -20,7 +22,7 @@ class CreateUserServive {
       throw new AppError('Email address already used', 401)
     }
 
-    const hashedPassword = await hash(password, 8)
+    const hashedPassword = await this.hashProvider.generateHash(password)
 
     const user = await this.userRepository.create({
       name,

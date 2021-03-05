@@ -1,5 +1,8 @@
 import { container } from 'tsyringe'
 
+import '@mobules/users/providers'
+import '@shared/container/providers'
+
 import IAppointmentRepository from '@mobules/appointments/repositories/IAppointmentsRepository'
 import AppointmentsRepository from '@mobules/appointments/infra/typeorm/repositories/AppointmentsRepository'
 
@@ -8,10 +11,7 @@ import UsersRepository from '@mobules/users/infra/typeorm/repositories/UsersRepo
 
 container.registerSingleton<IAppointmentRepository>(
   'AppointmentsRepository',
-  AppointmentsRepository
+  AppointmentsRepository,
 )
 
-container.registerSingleton<IUsersRepository>(
-  'UsersRepository',
-  UsersRepository
-)
+container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository)
