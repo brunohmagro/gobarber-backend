@@ -10,18 +10,13 @@ import AppError from '@shared/errors/AppError'
 class CreateAppointmentService {
   constructor(
     @inject('AppointmentsRepository')
-    private appointmentRepository: IAppointmentsRepository
+    private appointmentRepository: IAppointmentsRepository,
   ) {}
 
-  public async execute({
-    date,
-    provider_id,
-  }: ICreateAppintmentDTO): Promise<Appointment> {
+  public async execute({ date, provider_id }: ICreateAppintmentDTO): Promise<Appointment> {
     const appointmentDate = startOfHour(date)
 
-    const findAppointmentInSameDate = await this.appointmentRepository.findByDate(
-      appointmentDate
-    )
+    const findAppointmentInSameDate = await this.appointmentRepository.findByDate(appointmentDate)
 
     if (findAppointmentInSameDate) {
       throw new AppError('This appointment is aleready booked')
