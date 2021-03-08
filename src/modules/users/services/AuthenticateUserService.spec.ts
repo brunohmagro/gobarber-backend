@@ -4,13 +4,20 @@ import AuthenticateUserService from '@mobules/users/services/AuthenticateUserSer
 import CreateUserService from '@mobules/users/services/CreateUserService'
 import AppError from '@shared/errors/AppError'
 
-describe('CreateUser', () => {
-  it('should be able to create a new user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository()
-    const fakeHash = new FakeHashProvider()
-    const createUser = new CreateUserService(fakeUsersRepository, fakeHash)
-    const authenticateUser = new AuthenticateUserService(fakeUsersRepository, fakeHash)
+let fakeUsersRepository: FakeUsersRepository
+let fakeHash: FakeHashProvider
+let createUser: CreateUserService
+let authenticateUser: AuthenticateUserService
 
+describe('CreateUser', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository()
+    fakeHash = new FakeHashProvider()
+    createUser = new CreateUserService(fakeUsersRepository, fakeHash)
+    authenticateUser = new AuthenticateUserService(fakeUsersRepository, fakeHash)
+  })
+
+  it('should be able to create a new user', async () => {
     const user = await createUser.execute({
       name: 'John Doe',
       email: 'john.doe@mail.com',
@@ -27,11 +34,7 @@ describe('CreateUser', () => {
   })
 
   it('should not authenticate user not found', async () => {
-    const fakeUsersRepository = new FakeUsersRepository()
-    const fakeHash = new FakeHashProvider()
-    const authenticateUser = new AuthenticateUserService(fakeUsersRepository, fakeHash)
-
-    expect(
+    await expect(
       authenticateUser.execute({
         email: 'john.doe1@mail.com',
         password: '12345',
@@ -40,18 +43,13 @@ describe('CreateUser', () => {
   })
 
   it('should not authenticate user when password doesn`t match', async () => {
-    const fakeUsersRepository = new FakeUsersRepository()
-    const fakeHash = new FakeHashProvider()
-    const createUser = new CreateUserService(fakeUsersRepository, fakeHash)
-    const authenticateUser = new AuthenticateUserService(fakeUsersRepository, fakeHash)
-
     await createUser.execute({
       name: 'John Doe',
       email: 'john.doe@mail.com',
       password: '12345',
     })
 
-    expect(
+    await expect(
       authenticateUser.execute({
         email: 'john.doe@mail.com',
         password: '123456',

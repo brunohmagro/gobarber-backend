@@ -3,12 +3,18 @@ import FakeHashProvider from '@mobules/users/providers/HashProvider/fakes/FakeHa
 import CreateUserService from '@mobules/users/services/CreateUserService'
 import AppError from '@shared/errors/AppError'
 
-describe('CreateUser', () => {
-  it('should be able to create a new user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository()
-    const fakeHash = new FakeHashProvider()
-    const createUser = new CreateUserService(fakeUsersRepository, fakeHash)
+let fakeUsersRepository: FakeUsersRepository
+let fakeHash: FakeHashProvider
+let createUser: CreateUserService
 
+describe('CreateUser', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository()
+    fakeHash = new FakeHashProvider()
+    createUser = new CreateUserService(fakeUsersRepository, fakeHash)
+  })
+
+  it('should be able to create a new user', async () => {
     const user = await createUser.execute({
       name: 'John Doe',
       email: 'john.doe@mail.com',
@@ -19,17 +25,13 @@ describe('CreateUser', () => {
   })
 
   it('should not be able to create a new user with same email another', async () => {
-    const fakeUsersRepository = new FakeUsersRepository()
-    const fakeHash = new FakeHashProvider()
-    const createUser = new CreateUserService(fakeUsersRepository, fakeHash)
-
     await createUser.execute({
       name: 'John Doe',
       email: 'john.doe@mail.com',
       password: '12345',
     })
 
-    expect(
+    await expect(
       createUser.execute({
         name: 'John Doe',
         email: 'john.doe@mail.com',
