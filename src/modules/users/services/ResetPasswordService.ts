@@ -4,7 +4,7 @@ import { isAfter, addHours } from 'date-fns'
 import AppError from '@shared/errors/AppError'
 import IUsersRepository from '@mobules/users/repositories/IUsersRepository'
 import IUserTokensRepository from '@mobules/users/repositories/IUserTokensRepository'
-import IHashProvider from '@mobules/users/providers/HashProvider/models/IHashProvioder'
+import IHashProvider from '@mobules/users/providers/HashProvider/models/IHashProvider'
 
 interface IRequest {
   token: string

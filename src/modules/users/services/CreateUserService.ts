@@ -4,7 +4,7 @@ import User from '@mobules/users/infra/typeorm/entities/User'
 import AppError from '@shared/errors/AppError'
 import IUsersRepository from '@mobules/users/repositories/IUsersRepository'
 import ICreateUserDTO from '@mobules/users/dtos/ICreateUserDTO'
-import IHashProvioder from '@mobules/users/providers/HashProvider/models/IHashProvioder'
+import IHashProvioder from '@mobules/users/providers/HashProvider/models/IHashProvider'
 
 @injectable()
 class CreateUserServive {

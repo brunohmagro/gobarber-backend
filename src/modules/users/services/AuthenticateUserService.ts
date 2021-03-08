@@ -6,7 +6,7 @@ import authConfig from '@config/auth'
 import AppError from '@shared/errors/AppError'
 import IUsersRepository from '@mobules/users/repositories/IUsersRepository'
 import IAuthenticateUserDTO from '@mobules/users/dtos/IAuthenticateUserDTO'
-import IHashProvioder from '@mobules/users/providers/HashProvider/models/IHashProvioder'
+import IHashProvioder from '@mobules/users/providers/HashProvider/models/IHashProvider'
 
 interface IResponse {
   user: User
