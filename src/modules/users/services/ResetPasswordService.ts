@@ -21,11 +21,12 @@ class ResetPasswordService {
     @inject('UserTokensRepository')
     private userTokensRepository: IUserTokensRepository,
 
-    @inject('HashProvider')
+    @inject('BCryptProvider')
     private hashProvider: IHashProvider,
   ) {}
 
   public async execute({ token, password, confirmPassword }: IRequest): Promise<void> {
+    console.log('Dentro do service')
     if (password !== confirmPassword) {
       throw new AppError('Password and password confirmation does not match')
     }
