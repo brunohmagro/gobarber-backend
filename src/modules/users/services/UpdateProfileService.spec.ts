@@ -34,6 +34,16 @@ describe('UpdateProfile', () => {
     expect(updatedUser.email).toBe('john.snow@mail.com.br')
   })
 
+  it('should not be able to update the profile when user not found', async () => {
+    await expect(
+      updateProfile.execute({
+        user_id: 'non-exists-user',
+        name: 'John Snow',
+        email: 'john.snow@mail.com.br',
+      }),
+    ).rejects.toBeInstanceOf(AppError)
+  })
+
   it('should not be able to change email if this email exists', async () => {
     await createUser.execute({
       name: 'John Doe',
