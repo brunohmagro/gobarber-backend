@@ -4,9 +4,6 @@ import { getDate, getDaysInMonth } from 'date-fns'
 
 import IAppointmentsRepository from '@mobules/appointments/repositories/IAppointmentsRepository'
 
-// import User from '@mobules/users/infra/typeorm/entities/User'
-// import AppError from '@shared/errors/AppError'
-
 interface IRequest {
   provider_id: string
   month: number
