@@ -20,7 +20,7 @@ class ListProvidersService {
       except_user_id: user_id,
     })
 
-    if (!user) {
+    if (user.length === 0) {
       throw new AppError('Users not found', 404)
     }
 

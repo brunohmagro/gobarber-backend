@@ -2,8 +2,6 @@ import 'reflect-metadata'
 import ListProviderDayAvailabilityService from '@mobules/appointments/services/ListProviderDayAvailabilityService'
 import FakeAppointmentsRepository from '@mobules/appointments/repositories/fakes/FakeAppointmentsRepository'
 
-// import AppError from '@shared/errors/AppError'
-
 let listProviderDayAvailabilityService: ListProviderDayAvailabilityService
 let fakeAppointmentsRepository: FakeAppointmentsRepository
 
@@ -18,16 +16,19 @@ describe('ListProviderDayAvailabilityService', () => {
   it('should be able to list the day availability from provider', async () => {
     await fakeAppointmentsRepository.create({
       provider_id: 'user',
+      user_id: 'user-id',
       date: new Date(2021, 3, 20, 10, 0, 0),
     })
 
     await fakeAppointmentsRepository.create({
       provider_id: 'user',
+      user_id: 'user-id',
       date: new Date(2021, 3, 20, 14, 0, 0),
     })
 
     await fakeAppointmentsRepository.create({
       provider_id: 'user',
+      user_id: 'user-id',
       date: new Date(2021, 3, 20, 15, 0, 0),
     })
 

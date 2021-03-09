@@ -13,7 +13,7 @@ class CreateAppointmentService {
     private appointmentRepository: IAppointmentsRepository,
   ) {}
 
-  public async execute({ date, provider_id }: ICreateAppintmentDTO): Promise<Appointment> {
+  public async execute({ date, provider_id, user_id }: ICreateAppintmentDTO): Promise<Appointment> {
     const appointmentDate = startOfHour(date)
 
     const findAppointmentInSameDate = await this.appointmentRepository.findByDate(appointmentDate)
@@ -24,6 +24,7 @@ class CreateAppointmentService {
 
     const appointment = await this.appointmentRepository.create({
       provider_id,
+      user_id,
       date: appointmentDate,
     })
 
