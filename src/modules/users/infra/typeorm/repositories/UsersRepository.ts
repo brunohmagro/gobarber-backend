@@ -4,6 +4,7 @@ import User from '@mobules/users/infra/typeorm/entities/User'
 import ICreateUserDTO from '@mobules/users/dtos/ICreateUserDTO'
 import IUsersRepository from '@mobules/users/repositories/IUsersRepository'
 import IFindAllProvidersDTO from '@mobules/users/dtos/IFindAllProvidersDTO'
+import { classToClass } from 'class-transformer'
 
 class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>
@@ -25,7 +26,7 @@ class UsersRepository implements IUsersRepository {
       users = await this.ormRepository.find()
     }
 
-    return users
+    return classToClass(users)
   }
 
   public async findById(id: string): Promise<User | undefined> {

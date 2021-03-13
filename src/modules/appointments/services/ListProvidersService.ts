@@ -3,6 +3,7 @@ import { injectable, inject } from 'tsyringe'
 import User from '@mobules/users/infra/typeorm/entities/User'
 import AppError from '@shared/errors/AppError'
 import IUsersRepository from '@mobules/users/repositories/IUsersRepository'
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider'
 
 interface IRequest {
   user_id: string
@@ -13,18 +14,27 @@ class ListProvidersService {
   constructor(
     @inject('UsersRepository')
     private userRepository: IUsersRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({ user_id }: IRequest): Promise<User[]> {
-    const user = await this.userRepository.findAllProviders({
-      except_user_id: user_id,
-    })
+    let users = await this.cacheProvider.recover<User[]>(`providers-list:${user_id}`)
 
-    if (user.length === 0) {
-      throw new AppError('Users not found', 404)
+    if (!users) {
+      users = await this.userRepository.findAllProviders({
+        except_user_id: user_id,
+      })
+
+      if (users.length === 0) {
+        throw new AppError('Users not found', 404)
+      }
+
+      await this.cacheProvider.save(`providers-list:${user_id}`, users)
     }
 
-    return user
+    return users
   }
 }
 

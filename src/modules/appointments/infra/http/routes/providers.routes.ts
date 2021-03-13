@@ -13,7 +13,7 @@ const providersController = new ProvidersController()
 const providerMonthAvailabilityController = new ProviderMonthAvailabilityController()
 const providerDayAvailabilityController = new ProviderDayAvailabilityController()
 
-providersRouter.post('/', providersController.index)
+providersRouter.get('/', providersController.index)
 providersRouter.get(
   '/:provider_id/disponibilidade-mes',
   celebrate({
