@@ -55,7 +55,7 @@ class CreateAppointmentService {
       content: `Novo agendamento para dia ${dateFormatted}`,
     })
 
-    const cacheKey = `provider-appointments:${provider_id}:${format(appointmentDate, 'yyyy-M-D')}`
+    const cacheKey = `provider-appointments:${provider_id}:${format(appointmentDate, 'yyyy-M-d')}`
     await this.cacheProvider.invalidate(cacheKey)
 
     return appointment

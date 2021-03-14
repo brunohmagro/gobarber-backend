@@ -3,6 +3,7 @@ import FakeUsersRepository from '@mobules/users/repositories/fakes/FakeUserRepos
 import UpdateAvatarUserService from '@mobules/users/services/UpdateAvatarUserService'
 import CreateUserServive from '@mobules/users/services/CreateUserService'
 import FakeHashProvider from '@mobules/users/providers/HashProvider/fakes/FakeHashProvider'
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import AppError from '@shared/errors/AppError'
 
 let fakeUsersRepository: FakeUsersRepository
@@ -10,12 +11,14 @@ let fakeHash: FakeHashProvider
 let createUser: CreateUserServive
 let fakeStorage: FakeStorageProvider
 let updateAvatar: UpdateAvatarUserService
+let cacheProvider: FakeCacheProvider
 
 describe('UpdateAvatarUser', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository()
     fakeHash = new FakeHashProvider()
-    createUser = new CreateUserServive(fakeUsersRepository, fakeHash)
+    cacheProvider = new FakeCacheProvider()
+    createUser = new CreateUserServive(fakeUsersRepository, fakeHash, cacheProvider)
     fakeStorage = new FakeStorageProvider()
     updateAvatar = new UpdateAvatarUserService(fakeUsersRepository, fakeStorage)
   })

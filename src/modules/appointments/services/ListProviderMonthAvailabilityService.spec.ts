@@ -1,8 +1,6 @@
 import ListProviderMonthAvailabilityService from '@mobules/appointments/services/ListProviderMonthAvailabilityService'
 import FakeAppointmentsRepository from '@mobules/appointments/repositories/fakes/FakeAppointmentsRepository'
 
-// import AppError from '@shared/errors/AppError'
-
 let listProviderMonthAvailabilityService: ListProviderMonthAvailabilityService
 let fakeAppointmentsRepository: FakeAppointmentsRepository
 let year: number

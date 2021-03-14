@@ -2,18 +2,21 @@ import FakeUsersRepository from '@mobules/users/repositories/fakes/FakeUserRepos
 import UpdateProfileService from '@mobules/users/services/UpdateProfileService'
 import CreateUserServive from '@mobules/users/services/CreateUserService'
 import FakeHashProvider from '@mobules/users/providers/HashProvider/fakes/FakeHashProvider'
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import AppError from '@shared/errors/AppError'
 
 let fakeUsersRepository: FakeUsersRepository
 let fakeHash: FakeHashProvider
 let createUser: CreateUserServive
 let updateProfile: UpdateProfileService
+let cacheProvider: FakeCacheProvider
 
 describe('UpdateProfile', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository()
     fakeHash = new FakeHashProvider()
-    createUser = new CreateUserServive(fakeUsersRepository, fakeHash)
+    cacheProvider = new FakeCacheProvider()
+    createUser = new CreateUserServive(fakeUsersRepository, fakeHash, cacheProvider)
     updateProfile = new UpdateProfileService(fakeUsersRepository, fakeHash)
   })
 

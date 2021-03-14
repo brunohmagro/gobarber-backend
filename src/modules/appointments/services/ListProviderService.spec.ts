@@ -1,14 +1,17 @@
 import FakeUsersRepository from '@mobules/users/repositories/fakes/FakeUserRepository'
 import ListProvidersService from '@mobules/appointments/services/ListProvidersService'
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import AppError from '@shared/errors/AppError'
 
 let fakeUsersRepository: FakeUsersRepository
 let listProviders: ListProvidersService
+let cacheProvider: FakeCacheProvider
 
 describe('ListProviders', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository()
-    listProviders = new ListProvidersService(fakeUsersRepository)
+    cacheProvider = new FakeCacheProvider()
+    listProviders = new ListProvidersService(fakeUsersRepository, cacheProvider)
   })
 
   it('should be able to list the providers', async () => {
