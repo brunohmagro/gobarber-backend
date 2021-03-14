@@ -5,14 +5,19 @@ import AppError from '@shared/errors/AppError'
 import IUsersRepository from '@mobules/users/repositories/IUsersRepository'
 import ICreateUserDTO from '@mobules/users/dtos/ICreateUserDTO'
 import IHashProvioder from '@mobules/users/providers/HashProvider/models/IHashProvider'
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider'
 
 @injectable()
 class CreateUserServive {
   constructor(
     @inject('UsersRepository')
     private userRepository: IUsersRepository,
+
     @inject('BCryptProvider')
     private hashProvider: IHashProvioder,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({ name, email, password }: ICreateUserDTO): Promise<User> {
@@ -29,6 +34,8 @@ class CreateUserServive {
       email,
       password: hashedPassword,
     })
+
+    await this.cacheProvider.invalidatePrefix('providers-list')
 
     return user
   }
