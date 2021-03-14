@@ -6,6 +6,7 @@ import IAppointmentsRepository from '@mobules/appointments/repositories/IAppoint
 import INotificationsRepository from '@mobules/notifications/repositories/INotificationsRepository'
 import ICreateAppintmentDTO from '@mobules/appointments/dtos/ICreateAppintmentDTO'
 import AppError from '@shared/errors/AppError'
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider'
 
 @injectable()
 class CreateAppointmentService {
@@ -15,6 +16,9 @@ class CreateAppointmentService {
 
     @inject('NotificationsRepository')
     private notificationsRepository: INotificationsRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({ date, provider_id, user_id }: ICreateAppintmentDTO): Promise<Appointment> {
@@ -50,6 +54,9 @@ class CreateAppointmentService {
       recipient_id: provider_id,
       content: `Novo agendamento para dia ${dateFormatted}`,
     })
+
+    const cacheKey = `provider-appointments:${provider_id}:${format(appointmentDate, 'yyyy-M-D')}`
+    await this.cacheProvider.invalidate(cacheKey)
 
     return appointment
   }
