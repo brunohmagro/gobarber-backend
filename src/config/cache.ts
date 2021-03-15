@@ -11,9 +11,9 @@ export default {
   driver: 'redis',
   config: {
     redis: {
-      host: '127.0.0.1',
-      port: 6379,
-      password: null,
+      host: process.env.REDIS_ROUTE,
+      port: Number(process.env.REDIS_PORT),
+      password: process.env.REDIS_PASS || null,
     },
   },
 } as ICacheConfig
