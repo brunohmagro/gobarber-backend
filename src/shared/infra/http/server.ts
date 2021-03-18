@@ -15,10 +15,10 @@ import '@shared/infra/typeorm'
 import '@shared/container'
 
 const app = express()
-app.use(RateLimter)
-app.use(cors())
+app.use(cors({}))
 app.use(express.json())
 app.use('/files', express.static(uploadConfig.uploadFolder))
+app.use(RateLimter)
 app.use(routes)
 
 app.use(errors())
