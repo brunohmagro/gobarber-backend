@@ -29,7 +29,7 @@ class ListProvidersService {
       })
 
       if (users.length === 0) {
-        throw new AppError('Providers not found', 404)
+        throw new AppError('Providers not founds', 404)
       }
 
       await this.cacheProvider.save(`providers-list:${user_id}`, classToClass(users))
