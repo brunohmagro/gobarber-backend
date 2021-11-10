@@ -64,6 +64,12 @@ $ cd gobarber-backend
 # Run the command:
 $ yarn install
 
+# Create env file:
+$ cp .env.exeample .env
+
+# Create ormconfig file:
+$ cp ormconfig.example.json ormconfig.json
+
 # After that, run the command:
 $ yarn start
 ```
