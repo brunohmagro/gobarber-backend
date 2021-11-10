@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://github.com/brunohmagro/gobarber-backend/tree/master/.github/images/logo.svg" width="300" title="GoBarber">
+  <img src="https://github.com/brunohmagro/gobarber-backend/blob/master/.github/images/logo.svg" width="300" title="GoBarber">
 
 </h1>
 
@@ -18,7 +18,7 @@ This layout was developed by: [Rocketseat](https://github.com/Rocketseat)
 
   <div align="center">
 
-  <img src="https://github.com/brunohmagro/gobarber-backend/tree/master/.github/images/capa.png" title="Layout">
+  <img src="https://github.com/brunohmagro/gobarber-backend/blob/master/.github/images/capa.png" title="Layout">
 
 </div>
 
