@@ -1,6 +1,6 @@
 <h1 align="center">
-  <img src="https://github.com/brunohmagro/appgobarber/blob/master/.github/images/logo.svg" width="300" title="GoBarber">
-  
+  <img src="https://github.com/brunohmagro/gobarber-backend/.github/images/logo.svg" width="300" title="GoBarber">
+
 </h1>
 
 <div align="center">
@@ -18,7 +18,7 @@ This layout was developed by: [Rocketseat](https://github.com/Rocketseat)
 
   <div align="center">
 
-  <img src="https://github.com/brunohmagro/appgobarber/blob/master/.github/images/capa.png" title="Layout">
+  <img src="https://github.com/brunohmagro/gobarber-backend/.github/images/capa.png" title="Layout">
 
 </div>
 
@@ -66,7 +66,7 @@ $ yarn start
 
 ``http://localhost:3335``
 
-## Authors ✍️ 
+## Authors ✍️
 
 - [@brunohmagro](https://github.com/brunohmagro) - Coding
 - [@rocketseat](https://github.com/rocketseat) - Conseption
@@ -75,7 +75,7 @@ Make always with ❤️ for Bruno Magro 👋🏽 Contact:
 
 <br>
 
-[![Linkedin Badge](https://img.shields.io/badge/-Bruno%20Magro-000657?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/brunohmagro/)](https://www.linkedin.com/in/brunohmagro/) 
+[![Linkedin Badge](https://img.shields.io/badge/-Bruno%20Magro-000657?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/brunohmagro/)](https://www.linkedin.com/in/brunohmagro/)
 [![Outlook Badge](https://img.shields.io/badge/-brunohmagro@hotmail.com-000657?style=flat-square&logo=microsoft-outlook&logoColor=white&link=mailto:brunohmagro@hotmail.com)](mailto:brunohmagro@hotmail.com)
 
 <p style="color: #4978FF;"><b>#dontstoptolearning</b></p>
