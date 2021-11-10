@@ -55,7 +55,13 @@ $ docker ps
 #### Backend
 
 ```bash
-# Enter the project root **/backend** and run the command:
+# Clone the project
+$ git clone git@github.com:brunohmagro/gobarber-backend.git
+
+# Go to the root:
+$ cd gobarber-backend
+
+# Run the command:
 $ yarn install
 
 # After that, run the command:
